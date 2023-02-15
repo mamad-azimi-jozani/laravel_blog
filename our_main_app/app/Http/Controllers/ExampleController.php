@@ -8,7 +8,8 @@ class ExampleController extends Controller
 {
     public function home_page()
     {
-        return 'this is home page dude';
+        $out_team = ['mohammad', 'talai', 'jadi', ];
+        return view('home_page', ['name' => $out_team]);
     }
 
     public function about_page()
