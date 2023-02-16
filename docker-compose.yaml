@@ -1,29 +1,17 @@
-version: '3.8'
-
+version: '3.9'
 services:
-  php:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-    volumes:
-      - .:/var/www/html/
-
   db:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-  adminer:
-    image: adminer
-    restart: always
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: mohammad
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
     ports:
-      - 8080:8080
+      - '3307:3306'
+    volumes:
+      - mysql:/var/lib/mysql
+
 
 volumes:
-  mysql-data:
+  mysql:
