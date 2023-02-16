@@ -14,6 +14,6 @@ class ExampleController extends Controller
 
     public function about_page()
     {
-        return 'this is about page dude';
+        return view('single_post');
     }
 }
