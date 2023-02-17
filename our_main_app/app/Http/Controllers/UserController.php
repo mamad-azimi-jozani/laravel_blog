@@ -23,8 +23,9 @@ class UserController extends Controller
         ]);
 
         $incoming_fields['password'] = bcrypt($incoming_fields['password']);
-        User::create($incoming_fields);
-        return 'hello register';
+        $user = User::create($incoming_fields);
+        auth()->login($user);
+        return redirect('/')->with('success', 'you register to our site successfully!');
 
     }
 
@@ -36,9 +37,9 @@ class UserController extends Controller
         if (auth()->attempt(['username' => $incoming_field
         ['login_username'], 'password'=>$incoming_field['login_password']])){
             $request.session()->regenerate();
-            return 'ok!';
+            return redirect('/')->with('success', 'you are logged in!');
         }else{
-            return 'No!!';
+            return redirect('/')->with('failure', 'information is not correct!');
         }
     }
 
@@ -50,6 +51,11 @@ class UserController extends Controller
             return view('home_page');
         }
 
+    }
+
+    public function logout(){
+        auth()->logout();
+        return redirect('/')->with('success', 'you are logged out');
 
     }
 }
