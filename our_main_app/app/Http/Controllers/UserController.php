@@ -27,4 +27,29 @@ class UserController extends Controller
         return 'hello register';
 
     }
+
+    public function login(Request $request){
+        $incoming_field = $request->validate([
+            'login_username' => ['required', ],
+            'login_password' => ['required', ]
+        ]);
+        if (auth()->attempt(['username' => $incoming_field
+        ['login_username'], 'password'=>$incoming_field['login_password']])){
+            $request.session()->regenerate();
+            return 'ok!';
+        }else{
+            return 'No!!';
+        }
+    }
+
+
+    public function Show_correct_home_page(){
+        if (auth()->check()){
+            return view('home_page_feed');
+        }else {
+            return view('home_page');
+        }
+
+
+    }
 }
