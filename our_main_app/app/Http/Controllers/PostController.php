@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -28,8 +29,9 @@ class PostController extends Controller
     }
 
     public function view_single_post(Post $post){
-
-      return view('single_post', ['post'=> $post]);
+        $ourHtml = Str::markdown($post->body);
+        $post['body'] = $ourHtml;
+        return view('single_post', ['post'=> $post]);
     }
 
 }
