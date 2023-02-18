@@ -38,3 +38,4 @@ Route::post('/create-post', [PostController::class, 'show_new_post'])
 Route::get('/post/{post}', [PostController::class, 'view_single_post']);
 
 // profile
+Route::get('/profile/{user:username}', [UserController::class, 'profile']);
