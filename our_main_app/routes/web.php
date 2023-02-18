@@ -14,15 +14,27 @@ use App\Http\Controllers\UserController;
 |
 */
 // user related route
-Route::get('/', [UserController::class, 'show_correct_home_page']);
-Route::post('/register', [UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::get('/', [UserController::class, 'show_correct_home_page'])
+    ->name('login');
+
+Route::post('/register', [UserController::class, 'register'])
+    ->middleware('guest');
+
+Route::post('/login', [UserController::class, 'login'])
+    ->middleware('guest');
+
 Route::post('/logout', [UserController::class, 'logout']);
-Route::post('/', [UserController::class, 'logout']);
+
+Route::post('/logout', [UserController::class, 'logout'])
+    ->middleware('auth');
 
 // blog related route
-Route::get('/create-post', [PostController::class, 'show_create_form']);
-Route::post('/create-post', [PostController::class, 'show_new_post']);
+Route::get('/create-post', [PostController::class, 'show_create_form'])
+    ->middleware('must_be_logged_in');
+
+Route::post('/create-post', [PostController::class, 'show_new_post'])
+    ->middleware('must_be_logged_in');
 
 Route::get('/post/{post}', [PostController::class, 'view_single_post']);
 
+// profile
