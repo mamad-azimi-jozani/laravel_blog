@@ -28,6 +28,8 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/logout', [UserController::class, 'logout'])
     ->middleware('auth');
 
+
+
 // blog related route
 Route::get('/create-post', [PostController::class, 'show_create_form'])
     ->middleware('must_be_logged_in');
@@ -37,7 +39,12 @@ Route::post('/create-post', [PostController::class, 'show_new_post'])
 
 Route::get('/post/{post}', [PostController::class, 'view_single_post']);
 
-Route::delete('/post/{post}', [PostController::class, 'delete']);
+Route::delete('/post/{post}', [PostController::class, 'delete'])
+    ->middleware('can:delete, post');
+
+Route::get('/post/{post}/edit', [PostController::class, 'show_edit_form'])->middleware('can:update,post');
+Route::put('/post/{post}', [PostController::class, 'update_post'])->middleware('can:update,post');
+
 
 
 // profile
