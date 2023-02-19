@@ -13,6 +13,13 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// admin
+Route::get('/admins-only', function (){
+    return "only admin should be able to see this page";
+})->middleware('can:admin_visit_pages');
+
+
 // user related route
 Route::get('/', [UserController::class, 'show_correct_home_page'])
     ->name('login');
@@ -49,4 +56,7 @@ Route::put('/post/{post}', [PostController::class, 'update_post'])->middleware('
 
 // profile
 Route::get('/profile/{user:username}', [UserController::class, 'profile']);
+
+
+
 
