@@ -109,6 +109,7 @@
       <excludeFolder url="file://$MODULE_DIR$/our_main_app/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/our_main_app/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/our_main_app/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/our_main_app/vendor/intervention/image" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

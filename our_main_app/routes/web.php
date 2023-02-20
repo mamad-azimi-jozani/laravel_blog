@@ -35,7 +35,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 Route::post('/logout', [UserController::class, 'logout'])
     ->middleware('auth');
 
-Route::get('/manage-avatar', [UserController::class, 'show_avatar']);
+Route::get('/manage-avatar', [UserController::class, 'show_avatar'])->middleware('must_be_logged_in');
 Route::post('/manage-avatar', [UserController::class, 'store_avatar']);
 
 
